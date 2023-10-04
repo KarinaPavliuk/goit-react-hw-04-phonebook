@@ -32,8 +32,9 @@ export const App = () => {
   };
 
   const onDeleteClick = id => {
-    const newContacts = () => contacts.filter(contact => contact.id !== id);
-    setContacts(newContacts());
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== id)
+    );
   };
 
   const createContact = newContact => {
@@ -46,8 +47,10 @@ export const App = () => {
       return;
     }
 
-    const newContacts = [...contacts, { ...newContact, id: nanoid() }];
-    setContacts(newContacts);
+    setContacts(prevContacts => [
+      ...prevContacts,
+      { ...newContact, id: nanoid() },
+    ]);
   };
 
   const getFilteredContacts = () => {
